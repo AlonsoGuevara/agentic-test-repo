@@ -1,0 +1,63 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.backends.legacy:build"
+
+[project]
+name = "agentic-cafe"
+version = "0.1.0"
+description = "Collaborative Agentic Framework for Engineers"
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.11"
+authors = [
+    { name = "Agentic CAFE Contributors" },
+]
+keywords = ["agents", "ai", "orchestration", "multi-agent", "framework", "async"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Framework :: AsyncIO",
+]
+dependencies = [
+    "pydantic>=2.0",
+    "httpx>=0.24",
+    "rich>=13.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.4",
+    "pytest-asyncio>=0.23",
+    "pytest-cov>=4.1",
+    "black>=23.0",
+    "flake8>=6.1",
+    "mypy>=1.5",
+]
+
+[project.urls]
+Homepage = "https://github.com/agentic-cafe/agentic-cafe"
+Repository = "https://github.com/agentic-cafe/agentic-cafe"
+"Bug Tracker" = "https://github.com/agentic-cafe/agentic-cafe/issues"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.black]
+line-length = 88
+target-version = ["py311", "py312"]
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+addopts = "--cov=src/agentic_cafe --cov-report=term-missing"
