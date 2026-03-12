@@ -28,3 +28,14 @@ def test_main_env_override(monkeypatch) -> None:
         _, kwargs = mock_run.call_args
         assert kwargs["host"] == "0.0.0.0"
         assert kwargs["port"] == 9090
+
+
+def test_main_invalid_port_falls_back(monkeypatch) -> None:
+    """main() should fall back to port 8000 when PORT is non-numeric."""
+    monkeypatch.setenv("PORT", "abc")
+
+    with patch("uvicorn.run") as mock_run:
+        main()
+        mock_run.assert_called_once()
+        _, kwargs = mock_run.call_args
+        assert kwargs["port"] == 8000
