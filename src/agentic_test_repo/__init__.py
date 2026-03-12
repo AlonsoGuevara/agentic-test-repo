@@ -1,8 +1,12 @@
-import uvicorn
+import os
 
 
 def main() -> None:
     """Start the Uvicorn server with the FastAPI application."""
+    import uvicorn
+
     from agentic_test_repo.app import create_app
 
-    uvicorn.run(create_app(), host="0.0.0.0", port=8000)
+    host = os.environ.get("HOST", "127.0.0.1")
+    port = int(os.environ.get("PORT", "8000"))
+    uvicorn.run(create_app(), host=host, port=port)
